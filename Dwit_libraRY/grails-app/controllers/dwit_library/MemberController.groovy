@@ -7,6 +7,7 @@ import np.edu.dwit.User
 
 class MemberController {
     def springSecurityService
+    def memberService
     @Secured(['IS_AUTHENTICATED_ANONYMOUSLY'])
     def index() {
         println(springSecurityService.isLoggedIn())
@@ -53,11 +54,18 @@ class MemberController {
         render(view: "dashboard")
     }
 
-    @Secured('ROLE_ADMIN')
+    @Secured("ROLE_ADMIN")
     def history(){
 
         def member = Member.findById(params?.id as Long)
-        def memberService = new MemberService()
-        [history : memberService.getHistory(member)]
+        def currentUser = springSecurityService.currentUser
+        if(!member.username.equalsIgnoreCase(currentUser.username)){
+
+            flash.message = "Sorry, you're not authorized to view this page."
+            println flash.message
+            return
+        }
+        def history = memberService.getHistory(member)
+        [history : history]
     }
 }

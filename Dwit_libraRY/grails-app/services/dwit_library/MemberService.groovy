@@ -19,8 +19,13 @@ class MemberService {
         for (int i = 0; i < borrowedBooks.size(); i++){
 
             Borrow borrow = borrowedBooks.get(i)
-            Fine fine = fines.get(i)
-            history.put(borrow, fine)
+            Fine fine
+            try {
+                fine = fines.get(i)
+                history.put(borrow, fine)
+            }catch(IndexOutOfBoundsException e) {
+                history.put(borrow, null)
+            }
         }
 
         return history
