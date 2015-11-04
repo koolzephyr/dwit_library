@@ -12,6 +12,27 @@
 </head>
 
 <body>
-dashboard page
+    <input type="button" name="history" id="history" value="History">
+    Number of allowed : <input type="text" name="allowed" id="allowed" value="${count}" disabled>
+    <table>
+        <thead>
+            <tr>
+                <th>S.No</th>
+                <th>Name</th>
+                <th>Author</th>
+                <th>Available Quantity</th>
+            </tr>
+        </thead>
+        <tbody>
+            <g:each in="${list}" var="booklist" status="i">
+                <tr>
+                    <td>${i+1}</td>
+                    <td>${booklist.name}</td>
+                    <td>${booklist.author}</td>
+                    <td>${booklist.availableQuantity}</td>
+                </tr>
+            </g:each>
+        </tbody>
+    </table>
 </body>
 </html>
