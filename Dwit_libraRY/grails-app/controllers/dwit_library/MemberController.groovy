@@ -1,6 +1,7 @@
 package dwit_library
 
 import grails.plugin.springsecurity.annotation.Secured
+import np.edu.dwit.Member
 import np.edu.dwit.User
 
 
@@ -50,5 +51,13 @@ class MemberController {
     @Secured("ROLE_LIBRARIAN")
     def librarianDashboard(){
         render(view: "dashboard")
+    }
+
+    @Secured('ROLE_ADMIN')
+    def history(){
+
+        def member = Member.findById(params?.id as Long)
+        def memberService = new MemberService()
+        [history : memberService.getHistory(member)]
     }
 }
