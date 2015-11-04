@@ -3,6 +3,7 @@ package np.edu.dwit
 class Member extends User {
     String email
     String contact
+    String status
 
     static constraints = {
     }
