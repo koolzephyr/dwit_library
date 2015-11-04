@@ -39,16 +39,16 @@ class MemberController {
     @Secured("ROLE_ADMIN")
     def adminDashboard(){
         println("here")
-        render(view: "adminDashboard")
+        render(view: "dashboard")
     }
 
     @Secured("ROLE_FACULTY")
     def facultyDashboard(){
-        render(view: "facultyDashboard")
+        render(view: "dashboard")
     }
 
     @Secured("ROLE_LIBRARIAN")
     def librarianDashboard(){
-        render(view: "librarianDashboard")
+        render(view: "dashboard")
     }
 }
