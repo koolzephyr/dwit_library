@@ -1,4 +1,5 @@
 import np.edu.dwit.User
+import np.edu.dwit.Member
 import np.edu.dwit.Role
 import np.edu.dwit.UserRole
 
@@ -6,10 +7,10 @@ import np.edu.dwit.UserRole
 class BootStrap {
 
     def init = { servletContext ->
-        User admin = new User(username:'admin',password:'admin',enabled:true).save()
-        User faculty = new User(username:'faculty',password:'faculty',enabled: true).save()
-        User student = new User(username:'student',password:'student',enabled: true).save()
-        User librarian = new User(username:'librarian',password:'librarian',enabled: true).save()
+        Member admin = new Member(username:'admin',password:'admin',enabled:true).save(failOnError: true)
+        Member faculty = new Member(username:'faculty',password:'faculty',enabled: true).save(failOnError: true)
+        Member student = new Member(username:'student',password:'student',enabled: true).save(failOnError: true)
+        Member librarian = new Member(username:'librarian',password:'librarian',enabled: true).save(failOnError: true)
 
         Role role_admin = new Role(authority: 'ROLE_ADMIN').save()
         Role role_faculty = new Role(authority: 'ROLE_FACULTY').save()
