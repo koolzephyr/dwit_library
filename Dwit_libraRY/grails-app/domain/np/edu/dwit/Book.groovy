@@ -6,7 +6,7 @@ class Book {
     Integer bookNumber
     Integer availableQuantity
     Integer totalQuantity
-    BookType bookType
+    String bookType
 
     static constraints = {
         name blank: false, nullable: false
@@ -14,7 +14,7 @@ class Book {
         bookNumber nullable: false
         availableQuantity nullable: false
         totalQuantity nullable: false
-        bookType nullable: false
+        bookType nullable: false, blank: false, inList: ['Reference', 'Gifted', 'Bought']
     }
     static mapping = {
         version false
