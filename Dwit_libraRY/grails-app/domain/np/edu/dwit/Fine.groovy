@@ -12,4 +12,9 @@ class Fine {
         member nullable: false
         days min: 0 as short
     }
+
+    static mapping = {
+
+        version false
+    }
 }

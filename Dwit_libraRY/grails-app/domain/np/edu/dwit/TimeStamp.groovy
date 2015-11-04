@@ -10,4 +10,9 @@ class TimeStamp {
         deadline min: new Date(), nullable: false
         role nullable: false
     }
+
+    static mapping = {
+
+        version false
+    }
 }
