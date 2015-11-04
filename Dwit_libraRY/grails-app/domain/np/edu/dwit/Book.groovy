@@ -9,11 +9,12 @@ class Book {
     BookType bookType
 
     static constraints = {
-        name blank: false
-        author blank: false
-        bookNumber blank: false
-        availableQuantity blank: false
-        totalQuantity blank: false
+        name blank: false, nullable: false
+        author blank: false, nullable: false
+        bookNumber nullable: false
+        availableQuantity nullable: false
+        totalQuantity nullable: false
+        bookType nullable: false
     }
     static mapping = {
         version false
