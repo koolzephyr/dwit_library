@@ -13,6 +13,7 @@
 
 <body>
     <input type="button" name="history" id="history" value="History">
+    <input type="text" name="bookName" id="bookName"><g:submitButton name="submit" value="Submit"/>
     Number of allowed : <input type="text" name="allowed" id="allowed" value="${count}" disabled>
     <table>
         <thead>
