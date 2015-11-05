@@ -1,6 +1,7 @@
 package dwit_library
 
 import grails.plugin.springsecurity.annotation.Secured
+import np.edu.dwit.Book
 import np.edu.dwit.Member
 import np.edu.dwit.User
 
@@ -27,7 +28,10 @@ class MemberController {
 
     @Secured("permitAll")
     def dashboard() {
-        render (view: "dashboard")
+        def currentUser= User.findById(springSecurityService.principal.id)
+        def count = Book.executeQuery("SELECT COUNT(b.id) from Borrow b where b.member = ? and b.returned = true",currentUser);
+        def bookList = Book.list();
+        render (view: "dashboard", model:[list: bookList, count: count[0]])
     }
 
 
