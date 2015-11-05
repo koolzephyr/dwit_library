@@ -12,14 +12,24 @@
 </head>
 
 <body>
-    <input type="button" name="history" id="history" value="History">
+    <ul>
+        <g:link controller="member" action="history" params="[id: params.id]"><li>History</li></g:link>
+        <sec:ifAllGranted roles="ROLE_LIBRARIAN">
+            <a href="#"><li>Issue</li></a>
+            <a href="#"><li>Return</li></a>
+            <a href="#"><li>Report</li></a>
+            <a href="#"><li>Configure</li></a>
+        </sec:ifAllGranted>
+        <form name="logout" method="POST" action="${createLink(controller:'logout') }">
+            <input type="submit" value="logout"></form>
+    </ul>
     <input type="text" name="bookName" id="bookName"><g:submitButton name="submit" value="Submit"/>
 
-    <sec:ifAllGranted roles="ROLE_ADMIN,ROLE_STUDENT,ROLE_FACULTY">
-        Number of allowed : <input type="text" name="allowed" id="allowed" value="${count}" disabled>
-    </sec:ifAllGranted>
+    <sec:ifAnyGranted roles="ROLE_ADMIN,ROLE_STUDENT,ROLE_FACULTY">
+        <div>Number of allowed : <input type="text" name="allowed" id="allowed" value="${count}" disabled></div>
+    </sec:ifAnyGranted>
 
-    <table>
+    <table border="1px">
         <thead>
             <tr>
                 <th>S.No</th>
