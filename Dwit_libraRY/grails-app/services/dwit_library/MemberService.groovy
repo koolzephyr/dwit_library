@@ -14,7 +14,7 @@ class MemberService {
         def borrowedBooks = Borrow.findAllByMemberAndReturned(member, true);
         def fines = Fine.findAllByBorrowInList(borrowedBooks);
 
-        Map<Borrow, Fine> history = new HashMap<>()
+        Map<Borrow, Double> history = new HashMap<>()
 
         for (int i = 0; i < borrowedBooks.size(); i++){
 
@@ -22,7 +22,7 @@ class MemberService {
             Fine fine
             try {
                 fine = fines.get(i)
-                history.put(borrow, fine)
+                history.put(borrow, fine.fineAmount)
             }catch(IndexOutOfBoundsException e) {
                 history.put(borrow, null)
             }

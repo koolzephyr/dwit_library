@@ -5,6 +5,7 @@ class Fine {
     Borrow borrow
     Member member
     short days
+    double fineAmount
 
     static constraints = {
 

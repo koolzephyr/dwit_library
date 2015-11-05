@@ -32,7 +32,7 @@
                     <td>${item.key.book.author}</td>
                     <td>${item.key.borrowedDate}</td>
                     <td>${item.key.returnedDate}</td>
-                    <td>${fine ? fine.days * DWITLibraryConstants.adminFineAmt : 0.0}</td>
+                    <td>${item.value?item.value:0.0}</td>
                 </tr>
             </g:each>
         </tbody>
