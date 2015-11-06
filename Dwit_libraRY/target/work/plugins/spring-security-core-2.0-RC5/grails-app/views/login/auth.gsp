@@ -1,8 +1,8 @@
-<html>
+<html xmlns="http://www.w3.org/1999/html">
 <head>
 	<meta name='layout' content='main'/>
 	<title><g:message code="springSecurity.login.title"/></title>
-	<style type='text/css' media='screen'>
+	%{--<style type='text/css' media='screen'>
 	#login {
 		margin: 15px 0px;
 		padding: 0px;
@@ -81,11 +81,78 @@
 	#login .inner .chk {
 		height: 12px;
 	}
-	</style>
+	</style>--}%
+    <link href="${resource(dir: 'css', file: 'login_style.css')}" rel="stylesheet">
+    <script src="${resource(dir: 'js', file: 'jquery.placeholder.min.js')}"></script>
+    <script src="${resource(dir: 'js', file: 'modernizr.custom.63321.js')}"></script>
+    <style>
+    @import url(http://fonts.googleapis.com/css?family=Raleway:400,700);
+    body {
+        background-image:url('${resource(dir: "images", file: "library3.jpg")}');
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        background-size: cover;
+    }
+    .container > header h1,
+    .container > header h2 {
+        color: #fff;
+        text-shadow: 0 1px 1px rgba(0,0,0,0.7);
+    }
+    #message{
+        color: white;
+        font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+        font-size: 18px;
+    }
+        .main{
+            width: 26%;
+            background-color: rgba(33, 45, 31, 0.38);
+            border-radius: 5px;
+        }
+        .form-5{
+            background-color:rgba(129, 93, 61, 0);
+            border-radius: 5px;
+            box-shadow: #0015b5;
+        }
+    .form-5 input[type=password]{
+        border-radius: 5px;
+    }
+    .form-5 input[type=text]{
+        border-radius: 5px;
+    }
+    </style>
 </head>
 
 <body>
-<div id='login'>
+<div class="container">
+    <header>
+        <h1 style="font-size: 40px"><strong>Library Management System</strong> </h1><br><br><br>
+        <g:if test="${flash.message}">
+            <div style="color: red" id="message" class="message" role="status">${flash.message}</div>
+        </g:if>
+    </header>
+    <section class="main">
+        <h1 style="text-align: center; font-size: 36px;color:white;">Login</h1>
+        <form class="form-5 clearfix" action="${postUrl}" autocomplete='off' method="POST" style="box-shadow: none">
+%{--
+                <label for='username' style="color:white"><g:message code="springSecurity.login.username.label"/>:</label>
+--}%
+                <input type='text' id="login" class='text_' name='j_username' id='username' placeholder="Username"/>
+                <br><br>
+%{--
+                <label for='password' style="color:white"><g:message code="springSecurity.login.password.label"/>:</label>
+--}%
+                <input type='password' placeholder="Password" class='text_' name='j_password' id='password'/>
+            <br><br>
+%{--
+                <input type='submit' id="submit" value='${message(code: "springSecurity.login.button")}'/>
+--}%
+                <button class="ui basic button" style="height: 20%;margin-left: 95px;background: white !important;" type="submit" value="${message(code:"springSecurity.login.button")}">
+                    <strong>Login</strong>
+                </button>
+        </form>​​​​
+    </section>
+</div>
+%{--<div id='login'>
 	<div class='inner'>
 		<div class='fheader'><g:message code="springSecurity.login.header"/></div>
 
@@ -114,7 +181,8 @@
 			</p>
 		</form>
 	</div>
-</div>
+</div>--}%
+
 <script type='text/javascript'>
 (function() {
 	document.forms['loginForm'].elements['j_username'].focus();
