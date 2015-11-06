@@ -17,8 +17,11 @@
         <sec:ifAllGranted roles="ROLE_LIBRARIAN">
             <a href="#"><li>Issue</li></a>
             <a href="#"><li>Return</li></a>
-            <a href="#"><li>Report</li></a>
+            <g:link action="report" controller="book">Report</g:link>
             <a href="#"><li>Configure</li></a>
+            <g:link action="create" controller="book">Book</g:link>
+            <g:link action="create" controller="member">User</g:link>
+
         </sec:ifAllGranted>
         <form name="logout" method="POST" action="${createLink(controller:'logout') }">
             <input type="submit" value="logout"></form>
