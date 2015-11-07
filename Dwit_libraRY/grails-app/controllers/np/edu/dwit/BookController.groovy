@@ -1,5 +1,10 @@
 package np.edu.dwit
+
+import dwit_library.constants.DWITLibraryConstants
 import grails.plugin.springsecurity.annotation.Secured
+
+import java.sql.Timestamp
+
 import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
 @Secured(['ROLE_ADMIN', 'ROLE_LIBRARIAN'])
@@ -106,6 +111,72 @@ class BookController {
                 redirect action: "index", method: "GET"
             }
             '*' { render status: NOT_FOUND }
+        }
+    }
+
+    @Secured("ROLE_LIBRARIAN")
+    def issueBook() {
+        render(view: "issueBook",model: ["bookId":params.bookId])
+    }
+
+    @Secured("ROLE_LIBRARIAN")
+    @Transactional
+    def beforeIssue() {
+        def borrowingUser = User.findByUsername(params.borrowingUsername);
+
+        if(borrowingUser){
+            def c = Borrow.createCriteria()
+
+            def borrowCount = c.count {
+                eq("member", borrowingUser)
+                eq("returned", false)
+
+            }
+            def role = borrowingUser.getAuthorities().toString().substring(6,9);
+            def book = Book.findById(Long.valueOf(params.bookId).longValue())
+
+            Borrow borrow = new Borrow();
+            borrow.book = book
+            borrow.borrowedDate=new Timestamp(new Date().getTime())
+            borrow.returned=false
+            borrow.member=borrowingUser
+
+            if(role.equals("FAC")){
+                if(borrowCount>=DWITLibraryConstants.LIMIT_BOOK_BORROWABLE_FACULTY) {
+                    render "greaterborrowcount"
+                }else {
+                    borrow.save(flush: true)
+                    render "issue"
+                }
+            }else if(role.equals("LIB")){
+                if(borrowCount>=DWITLibraryConstants.LIMIT_BOOK_BORROWABLE_LIBRARIAN) {
+                    render "greaterborrowcount"
+                }else {
+
+                    borrow.save(flush: true)
+                    render "issue"
+                }
+            }
+
+            else if(role.equals("ADM")){
+                if(borrowCount>=DWITLibraryConstants.LIMIT_BOOK_BORROWABLE_ADMIN) {
+                    render "greaterborrowcount"
+                }else {
+                    borrow.save(flush: true)
+                    render "issue"
+                }
+            }else if(role.equals("STU")){
+                if(borrowCount>=DWITLibraryConstants.LIMIT_BOOK_BORROWABLE_STUDENT) {
+                    render "greaterborrowcount"
+                }else {
+                    borrow.save(flush: true)
+                    render "issue"
+                }
+            }
+            else {
+                render "error"
+            }
+
         }
     }
 }

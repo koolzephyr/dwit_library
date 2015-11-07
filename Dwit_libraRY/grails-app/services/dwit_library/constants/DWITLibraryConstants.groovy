@@ -14,4 +14,8 @@ class DWITLibraryConstants {
     public static final short COURSE_BOOK_BORROWABLE_ADMIN = 30;
     public static final short COURSE_BOOK_BORROWABLE_LIBRARIAN = 30;
     public static final short NOVEL_BOOK_BORROWABLE = 15;
+    public static final short LIMIT_BOOK_BORROWABLE_STUDENT = 3;
+    public static final short LIMIT_BOOK_BORROWABLE_ADMIN = 3;
+    public static final short LIMIT_BOOK_BORROWABLE_LIBRARIAN = 3;
+    public static final short LIMIT_BOOK_BORROWABLE_FACULTY= 3;
 }

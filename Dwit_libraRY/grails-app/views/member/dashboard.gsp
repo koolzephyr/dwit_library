@@ -42,6 +42,7 @@
                     <th>Total Quantity</th>
                 </sec:ifAllGranted>
                 <th>Available Quantity</th>
+                <th>Issue</th>
             </tr>
         </thead>
         <tbody>
@@ -54,6 +55,7 @@
                         <td>${booklist.totalQuantity}</td>
                     </sec:ifAllGranted>
                     <td>${booklist.availableQuantity}</td>
+                    <td><g:link controller="book" action="issueBook" params="[bookId: booklist.id]">Issue</g:link></td>
                 </tr>
             </g:each>
         </tbody>
